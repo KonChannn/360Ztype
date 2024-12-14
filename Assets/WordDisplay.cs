@@ -35,6 +35,6 @@ public class WordDisplay : MonoBehaviour
         // Ensure we are working in 2D space by setting z to 0
         targetPosition.z = 0;
 
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed/10);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed/100);
     }
 }
