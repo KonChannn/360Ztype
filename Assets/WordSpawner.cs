@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WordSpawner : MonoBehaviour
 {
+    
     public GameObject wordPrefab;
     public RectTransform wordCanvas; // Ensure this is a RectTransform
 
@@ -12,7 +13,7 @@ public class WordSpawner : MonoBehaviour
         // Log canvas dimensions
         float canvasWidth = wordCanvas.rect.width;
         float canvasHeight = wordCanvas.rect.height;
-        Debug.Log($"Canvas Width: {canvasWidth}, Canvas Height: {canvasHeight}");
+        // Debug.Log($"Canvas Width: {canvasWidth}, Canvas Height: {canvasHeight}");
 
         // Randomly choose a side: 0 = Top, 1 = Bottom, 2 = Left, 3 = Right
         int side = Random.Range(0, 4);

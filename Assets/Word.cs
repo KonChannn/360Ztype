@@ -7,8 +7,9 @@ public class Word
 {
     public string word;
     private int typeIndex;
-
     private WordDisplay _display;
+    // private int bulletHitCount = 0;   // To track how many bullets have hit the word
+    // private int hitThreshold = 3;      // The number of hits required to destroy the word
 
     public Word(string word, WordDisplay display)
     {
@@ -16,6 +17,12 @@ public class Word
         typeIndex = 0;
         this._display = display;
         this._display.SetWord(word);
+    }
+
+    // Getter for the word display
+    public WordDisplay Display
+    {
+        get { return _display; }
     }
 
     public char GetNextLetter()
@@ -33,12 +40,17 @@ public class Word
     public bool WordTyped()
     {
         bool wordTyped = (typeIndex >= word.Length);
-        if (wordTyped)
+            
+        if (wordTyped )
         {
-            // Remove the word from the screen
-            _display.RemoveWord();
+            // Debug.Log("Word typed: " + word);
+            // // Debug.Log("Bullet hit count: " + _display.BulletHitCount);
+            // Debug.Log("Word length: " + _display.WordLength);
+            // // Remove the word from the screen
+            _display.CheckAndRemoveWord();
         }
         return wordTyped;
     }
+    
 
 }

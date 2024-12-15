@@ -7,16 +7,22 @@ public class WordManager : MonoBehaviour
     public List<Word> words;
     private bool hasActiveWord;
     private Word activeWord;
-
     public WordSpawner wordSpawner;
+    public Vector2 position;
 
-    private void Start()
+    public bool HasActiveWord()
     {
-        // words = new List<Word>();
-        AddWord();
-        AddWord();
-        AddWord();
+        return hasActiveWord;
     }
+
+
+    // private void Start()
+    // {
+    //     // words = new List<Word>();
+    //     AddWord();
+    //     AddWord();
+    //     AddWord();
+    // }
 
     public void AddWord()
     {
@@ -36,8 +42,11 @@ public class WordManager : MonoBehaviour
             {
                 // Remove letter from word
                 activeWord.TypeLetter();
+                position = activeWord.Display.transform.position;
+                // DebugActiveWordPosition(); 
             }
         }
+        // To Activate a word
         else
         {
             foreach (Word word in words)
@@ -47,6 +56,8 @@ public class WordManager : MonoBehaviour
                     activeWord = word;
                     hasActiveWord = true;
                     word.TypeLetter();
+                    position = activeWord.Display.transform.position;
+                    // DebugActiveWordPosition();
                     break;
                 }
             }
@@ -55,6 +66,18 @@ public class WordManager : MonoBehaviour
         {
             hasActiveWord = false;
             words.Remove(activeWord);
+        }
+    }
+    private void DebugActiveWordPosition()
+    {
+        if (activeWord != null && activeWord.Display != null)
+        {
+            Vector3 position = activeWord.Display.transform.position;
+            Debug.Log($"Active Word Position: {position}");
+        }
+        else
+        {
+            Debug.LogWarning("No active word or active word display found.");
         }
     }
 
