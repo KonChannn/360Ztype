@@ -27,7 +27,12 @@ public class Word
 
     public char GetNextLetter()
     {
-        return word[typeIndex];
+        // Only return a letter if typeIndex is within the valid range
+        if (typeIndex < word.Length)
+        {
+            return word[typeIndex];
+        }
+        return '\0';  // Return a null character or handle as needed
     }
 
     public void TypeLetter()

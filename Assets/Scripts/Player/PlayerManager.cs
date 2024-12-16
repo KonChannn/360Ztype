@@ -2,16 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
     public Rigidbody2D rb; // Reference to the Rigidbody2D for the player
     public WordManager wordManager; // Reference to the WordManager
     public float rotationSpeed = 5f; // Rotation speed for smooth rotation
+    public GameOverDisplay gameOverDisplay;
 
-
+    void OnTriggerEnter2D(Collider2D other)
+    {   
+        // Debug.Log($"Collided with: {collision.gameObject.name}, Tag: {collision.gameObject.tag}");
+        // Destroy the player when it collides with tag "Enemy"
+        if (other.CompareTag("Enemy"))
+        {
+            // Debug.Log(gameOver.IsGameOver);
+            // Debug.Log("Game Over!");
+            Time.timeScale = 0f;
+            gameOverDisplay.Setup();
+            // gameOver.IsGameOver = true;
+            // Destroy(other.gameObject);
+        }
+    }
     void Update()
     {
-        if (wordManager != null && wordManager.HasActiveWord())
+        if (wordManager != null && wordManager.HasActiveWord)
         {
             // Get the position of the active word
             Vector3 targetPosition = wordManager.position;

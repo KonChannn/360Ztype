@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7877373837605404514}
   - component: {fileID: 2539544022947568998}
   - component: {fileID: 1044979042209098682}
-  - component: {fileID: 1835734509508804713}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -76,18 +75,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 100
---- !u!114 &1835734509508804713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5089515240256887735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d733e68e0f47b70439c52dc0f621de6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5102660934226554910
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,9 +88,10 @@ GameObject:
   - component: {fileID: 628623093206425553}
   - component: {fileID: 3431907190046199113}
   - component: {fileID: 6241394030004642058}
+  - component: {fileID: 380247806073455479}
   m_Layer: 5
-  m_Name: Enemy1
-  m_TagString: Untagged
+  m_Name: Enemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -238,7 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 628623093206425553}
-  speed: 0.7
+  speed: 10
   explosionPrefab: {fileID: 4550479537793573192, guid: 545e331f1dc9304438ab862be6553f15, type: 3}
 --- !u!61 &6241394030004642058
 BoxCollider2D:
@@ -252,7 +240,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -285,3 +273,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 49.819946, y: 31.82959}
   m_EdgeRadius: 0
+--- !u!50 &380247806073455479
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5102660934226554910}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
+  m_Constraints: 0

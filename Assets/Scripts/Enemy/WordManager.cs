@@ -10,9 +10,13 @@ public class WordManager : MonoBehaviour
     public WordSpawner wordSpawner;
     public Vector2 position;
 
-    public bool HasActiveWord()
+    public bool HasActiveWord
     {
-        return hasActiveWord;
+        get { return hasActiveWord; }
+    }
+    public Word ActiveWord
+    {
+        get { return activeWord; }
     }
 
 
@@ -37,13 +41,19 @@ public class WordManager : MonoBehaviour
     {
         if (hasActiveWord)
         {
-            // Check if letter was next
-            if (activeWord.GetNextLetter() == letter)
+            if (activeWord.Display != null)
             {
-                // Remove letter from word
-                activeWord.TypeLetter();
-                position = activeWord.Display.transform.position;
-                // DebugActiveWordPosition(); 
+                if (activeWord.GetNextLetter() == letter)
+                {
+                    activeWord.TypeLetter();
+                    position = activeWord.Display.transform.position;
+                }
+            }
+            else
+            {
+                // Handle case where the WordDisplay has been destroyed
+                Debug.LogWarning("WordDisplay object has been destroyed, skipping interaction.");
+                hasActiveWord = false;
             }
         }
         // To Activate a word

@@ -148,4 +148,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 307115944420131705}
-  speed: 0.7
+  speed: 2
+  explosionPrefab: {fileID: 0}

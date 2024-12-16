@@ -6,21 +6,39 @@ public class Shooting : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject bulletPrefab;
+    public PlayerManager playerMovement; 
+    public WordManager wordManager;
     public float bulletForce = 100f;
-    public PlayerMovement playerMovement; 
     public float shootAngleThreshold = 5f;
     void Update()
     {
         if (Input.anyKeyDown)
         {
-            TryShoot();
+            Word activeWord = wordManager.ActiveWord;
+            char typedLetter = GetTypedLetter();
+
+            if(activeWord.GetNextLetter() == typedLetter)
+            {
+                TryShoot();
+            }
+
         }
+    }
+
+     private char GetTypedLetter()
+    {
+        // You could add more sophisticated checks depending on your input method
+        foreach (char c in Input.inputString)
+        {
+            return c; // Return the first character typed
+        }
+        return '\0'; // Return null character if no key is pressed
     }
 
     private void TryShoot()
     {
         // Check if player is aligned with the active word
-        if (playerMovement != null && playerMovement.wordManager.HasActiveWord())
+        if (playerMovement != null && playerMovement.wordManager.HasActiveWord)
         {
             Vector3 targetDirection = playerMovement.wordManager.position - (Vector2)transform.position;
 

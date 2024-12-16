@@ -6,7 +6,7 @@ using TMPro;
 public class WordDisplay : MonoBehaviour
 {
     public TextMeshProUGUI text;
-    public float speed = 2f; // Movement speed toward the player
+    [SerializeField] public float speed; // Movement speed toward the player
     private Vector3 targetPosition;
     private int bulletHitCount;
     private int wordLength;
@@ -16,8 +16,15 @@ public class WordDisplay : MonoBehaviour
     private void Awake()
     {
         // Initialize the explosion effect
-        explosionFx = gameObject.AddComponent<ExplosionFx>();
-        explosionFx.explosionEffect = explosionPrefab;
+        if (explosionPrefab != null)
+        {
+            explosionFx = gameObject.AddComponent<ExplosionFx>();
+            explosionFx.explosionEffect = explosionPrefab;
+        }
+        else
+        {
+            Debug.LogError("Explosion prefab is not assigned in the Inspector!");
+        }
     }
     public int BulletHitCount
     {
@@ -27,8 +34,8 @@ public class WordDisplay : MonoBehaviour
     {
         get { return wordLength; }
     }
-    // This method will be triggered when a bullet collides with the word
-    private void OnTriggerEnter2D(Collider2D other)
+    // This method will be triggered when a bullet/player collides with the word
+    void OnTriggerEnter2D(Collider2D other)
     {
         // Ensure the object colliding with the word has the "Bullet" tag
         if (other.CompareTag("Bullet"))
@@ -37,15 +44,16 @@ public class WordDisplay : MonoBehaviour
             bulletHitCount++; 
 
             // Play the explosion effect
-            
             explosionFx.SpawnExplosion();
 
-            // Optionally, destroy the bullet after it hits
             Destroy(other.gameObject);
 
-            // Check if the word is fully hit (bulletHitCount equals wordLength)
             CheckAndRemoveWord();
 
+        }
+        if (other.CompareTag("Player"))
+        {
+            Destroy(other.gameObject);      
         }
     }
 
@@ -86,7 +94,7 @@ public class WordDisplay : MonoBehaviour
         // Ensure we are working in 2D space by setting z to 0
         targetPosition.z = 0;
 
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed / 100);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
         // Debug.Log(text.text);
     }
